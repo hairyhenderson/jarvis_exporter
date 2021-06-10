@@ -1,0 +1,23 @@
+# Config file for [Air](https://github.com/cosmtrek/air)
+# Air rebuilds & reloads Go apps for a faster REPL loop - just run 'air'
+
+# Working directory
+# . or absolute path, please note that the directories following must be under root.
+root = "."
+tmp_dir = ".air.tmp"
+
+[build]
+cmd = "make bin/jarvis_exporter"
+bin = "jarvis_exporter"
+full_bin = "./bin/jarvis_exporter"
+include_ext = ["go", "mod"]
+exclude_dir = [".air.tmp"]
+
+# SIGINT before SIGKILL (mac/linux only)
+send_interrupt = true
+delay = 1000 # ms
+kill_delay = 1000 # ms
+
+[misc]
+# Delete .air.tmp directory on exit
+clean_on_exit = true
