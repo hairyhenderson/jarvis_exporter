@@ -23,7 +23,7 @@ func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill)
 	defer cancel()
 
-	addr := flag.String("addr", ":9833", "address to listen to")
+	addr := flag.String("addr", ":9834", "address to listen to")
 	serialport := flag.String("serialport", "/dev/cu.usbserial-AH02F0IR", "serial port path")
 	flag.Parse()
 
