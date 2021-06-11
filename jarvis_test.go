@@ -23,6 +23,7 @@ func TestVerifyChecksum(t *testing.T) {
 	assert.False(t, verifyChecksum(m))
 }
 
+//nolint:funlen
 func TestNextMessage(t *testing.T) {
 	ctx := context.Background()
 
