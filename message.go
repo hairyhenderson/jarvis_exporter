@@ -8,7 +8,7 @@ import (
 
 // Commands sent by desk
 const (
-	Height    uint8 = 0x1  // Height report (in mm, P0/P1, P2 unused - always 0xf)
+	Height    uint8 = 0x01 // Height report (in mm, P0/P1, P2 unused - always 0xf)
 	LimitResp uint8 = 0x20 // Max-height set/cleared; response to SetMax (0x21)
 	GetMax    uint8 = 0x21 // Report max-height; [P0,P1] = max-height (c.f. SetMax)
 	GetMin    uint8 = 0x22 // Report min-height; [P0,P1] = min-height
