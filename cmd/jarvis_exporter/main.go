@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"time"
 
 	jarvis "github.com/hairyhenderson/jarvis_exporter"
 	"github.com/prometheus/client_golang/prometheus"
@@ -54,9 +55,10 @@ func startServer(ctx context.Context, addr string, exitCode *int) (*http.Server,
 	mux.Handle("/metrics", promhttp.Handler())
 
 	srv := &http.Server{
-		Addr:        addr,
-		Handler:     mux,
-		BaseContext: func(net.Listener) context.Context { return ctx },
+		Addr:              addr,
+		Handler:           mux,
+		BaseContext:       func(net.Listener) context.Context { return ctx },
+		ReadHeaderTimeout: 2 * time.Second,
 	}
 
 	lc := net.ListenConfig{}
