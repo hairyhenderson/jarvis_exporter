@@ -90,7 +90,7 @@ func (j *Jarvis) ReadMessages(ctx context.Context, errch chan error, ch chan *Me
 // 6 = verified checksum
 // 7 = eom
 //
-//nolint:gocyclo,funlen,gocognit
+//nolint:gocyclo,funlen
 func (j *Jarvis) NextMessage(ctx context.Context) (*Message, error) {
 	state := uint8(0)
 	curParam := uint8(0)
