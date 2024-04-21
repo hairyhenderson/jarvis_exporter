@@ -146,6 +146,7 @@ func (j *Jarvis) NextMessage(ctx context.Context) (*Message, error) {
 			if p.length > 3 {
 				fmt.Printf("invalid length %0#x is greater than 3 (raw: %#v)\n", p.length, p.raw)
 				j.metrics.invalidLenCount.Inc()
+
 				invalidLenCount++
 
 				reset()
