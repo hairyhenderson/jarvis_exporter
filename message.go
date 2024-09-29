@@ -93,6 +93,7 @@ func (m Message) Preset() uint8 {
 	// their 1-indexed positions, we shift right by 1 and count the trailing
 	// zeroes. Another approach could be to use math.Log2 with lots of float64
 	// conversions, but this is far more efficient!
+	//nolint:gosec // disable G115
 	return uint8(bits.TrailingZeros8(uint8(m.params) >> 1))
 }
 
