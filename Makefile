@@ -44,9 +44,6 @@ test:
 lint:
 	@golangci-lint run -v --max-same-issues=0 --max-issues-per-linter=0
 
-ci-lint:
-	@golangci-lint run -v --max-same-issues=0 --max-issues-per-linter=0 --out-format=github-actions
-
-.PHONY: test lint ci-lint
+.PHONY: test lint
 .DELETE_ON_ERROR:
 .SECONDARY:
