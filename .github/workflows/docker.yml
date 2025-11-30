@@ -19,7 +19,7 @@ jobs:
       run: |
         mkdir -p ~/.docker
         echo '{"experimental": "enabled"}' > ~/.docker/config.json
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3.6.0
     - name: Set up Docker Buildx
