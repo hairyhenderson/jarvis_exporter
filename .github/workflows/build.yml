@@ -15,4 +15,4 @@ jobs:
       image: ghcr.io/hairyhenderson/gomplate-ci-build:latest
     steps:
       - uses: actions/checkout@v6
-      - run: make ci-lint
+      - run: make lint
