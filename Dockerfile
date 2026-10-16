@@ -1,5 +1,5 @@
-# syntax=docker/dockerfile:1.2.1-labs
-FROM --platform=linux/amd64 golang:1.26-alpine AS build
+# syntax=docker/dockerfile:1.2.1-labs@sha256:600e5c62eedff338b3f7a0850beb7c05866e0ef27b2d2e8c02aa468e78496ff5
+FROM --platform=linux/amd64 golang:1.26-alpine@sha256:3082400e369fa24d5fc60bca20edab3f6d604e0c5a690ec66b295eff4dd87ade AS build
 
 ARG PKG_NAME
 ARG TARGETOS
@@ -26,7 +26,7 @@ RUN --mount=type=cache,id=go-build-${TARGETOS}-${TARGETARCH}${TARGETVARIANT},tar
 			./cmd/${PKG_NAME}
 RUN mv bin/${PKG_NAME}* /bin/
 
-FROM alpine:3.23 AS runtime
+FROM alpine:3.23@sha256:85fe1e81d6758c208f3e1eed4338a1997e19d4be002d4dd32d3100c9a8c010a0 AS runtime
 
 ARG PKG_NAME
 ARG VCS_REF
