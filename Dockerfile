@@ -26,7 +26,7 @@ RUN --mount=type=cache,id=go-build-${TARGETOS}-${TARGETARCH}${TARGETVARIANT},tar
 			./cmd/${PKG_NAME}
 RUN mv bin/${PKG_NAME}* /bin/
 
-FROM alpine:3.23@sha256:85fe1e81d6758c208f3e1eed4338a1997e19d4be002d4dd32d3100c9a8c010a0 AS runtime
+FROM alpine:3.24@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6 AS runtime
 
 ARG PKG_NAME
 ARG VCS_REF
