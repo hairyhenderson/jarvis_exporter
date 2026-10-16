@@ -47,9 +47,8 @@ func main() {
 
 	defer srv.Shutdown(ctx)
 
-	if err := readLoop(ctx, *serialport, jmetrics); err != nil {
-		fmt.Println(err)
-	}
+	// readLoop only returns on a fatal error (or context cancellation)
+	fmt.Println(readLoop(ctx, *serialport, jmetrics))
 }
 
 func startServer(ctx context.Context, addr string, exitCode *int) (*http.Server, error) {
