@@ -4,15 +4,20 @@ on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/hairyhenderson/gomplate-ci-build:latest@sha256:22833a409503ef89e48703f29722359464baa499b8d0c1507e0206b4a4af6492
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
       - run: make test
   lint:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/hairyhenderson/gomplate-ci-build:latest@sha256:22833a409503ef89e48703f29722359464baa499b8d0c1507e0206b4a4af6492
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - run: make lint
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+      - uses: golangci/golangci-lint-action@ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a # v9.3.0
+        with:
+          version: latest
+          args: --verbose --max-same-issues=0 --max-issues-per-linter=0
