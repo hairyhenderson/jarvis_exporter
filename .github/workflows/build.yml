@@ -5,14 +5,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/hairyhenderson/gomplate-ci-build:latest@sha256:22833a409503ef89e48703f29722359464baa499b8d0c1507e0206b4a4af6492
+      image: ghcr.io/hairyhenderson/gomplate-ci-build:latest@sha256:fe6e86d7a56da48f5117dab0263317573e6155092a4672d9d0f591cf30a3b282
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - run: make test
   lint:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/hairyhenderson/gomplate-ci-build:latest@sha256:22833a409503ef89e48703f29722359464baa499b8d0c1507e0206b4a4af6492
+      image: ghcr.io/hairyhenderson/gomplate-ci-build:latest@sha256:fe6e86d7a56da48f5117dab0263317573e6155092a4672d9d0f591cf30a3b282
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - run: make lint
