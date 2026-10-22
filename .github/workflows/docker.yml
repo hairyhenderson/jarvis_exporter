@@ -4,7 +4,7 @@ on:
 
 jobs:
   docker-build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     services:
       registry:
         image: registry:3@sha256:be9a7062dd7e3316e5c0368e42740dc991a9ceb5d382317675a8738db0112af0
