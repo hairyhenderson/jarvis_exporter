@@ -1,0 +1,62 @@
+name: Release binaries
+on:
+  release:
+    types: [ published ]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to build and upload binaries for (e.g. v1.2.3)
+        required: true
+
+permissions:
+  contents: read
+
+env:
+  TAG: ${{ github.event.release.tag_name || inputs.tag }}
+  PKG_NAME: jarvis_exporter
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - { runner: ubuntu-latest, goos: linux, goarch: amd64, cgo: 0 }
+          - { runner: ubuntu-latest, goos: linux, goarch: arm64, cgo: 0 }
+          # github.com/tarm/serial needs cgo on darwin, so build natively
+          - { runner: macos-latest, goos: darwin, goarch: arm64, cgo: 1 }
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ env.TAG }}
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+      - name: Build
+        run: go build -ldflags "-w -s" -o "bin/${PKG_NAME}_${GOOS}-${GOARCH}" "./cmd/${PKG_NAME}"
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          CGO_ENABLED: ${{ matrix.cgo }}
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: ${{ matrix.goos }}-${{ matrix.goarch }}
+          path: bin/
+          if-no-files-found: error
+
+  upload:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          path: bin
+          merge-multiple: true
+      - name: Upload to release
+        run: |
+          cd bin && sha256sum "${PKG_NAME}"_* > "${PKG_NAME}_checksums.txt"
+          gh release upload "$TAG" "${PKG_NAME}"_* --clobber --repo "$GITHUB_REPOSITORY"
+        env:
+          GH_TOKEN: ${{ github.token }}
