@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/hairyhenderson/jarvis_exporter/compare/v0.1.0...v0.1.1) (2026-11-19)
+
+
+### Dependencies
+
+* build with Go 1.27.4 via a toolchain directive ([#220](https://github.com/hairyhenderson/jarvis_exporter/issues/220)) ([0767c2f](https://github.com/hairyhenderson/jarvis_exporter/commit/0767c2f24cc80924dffabe724045b556ddcb86e3))
+
 ## 0.1.0 (2026-10-26)
 
 
